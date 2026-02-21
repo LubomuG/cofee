@@ -57,6 +57,34 @@ $(document).ready(function() {
         }
     }
     
+    // ---------- Local Storage ----------
+    function saveToLocalStorage() {
+        const state = {
+            water: machine.waterAmount,
+            milk: machine.milkAmount,
+            coffee: machine.coffeeAmount,
+            sugar: machine.sugarAmount
+        };
+        localStorage.setItem('coffeeMachineState', JSON.stringify(state));
+    }
+
+    function loadFromLocalStorage() {
+        const saved = localStorage.getItem('coffeeMachineState');
+        if (saved) {
+            try {
+                const state = JSON.parse(saved);
+                // Застосовуємо збережені значення, але не виходимо за максимальні межі
+                machine.waterAmount = Math.min(state.water || 400, 500);
+                machine.milkAmount = Math.min(state.milk || 350, 500);
+                machine.coffeeAmount = Math.min(state.coffee || 150, 200);
+                machine.sugarAmount = Math.min(state.sugar || 180, 200);
+            } catch (e) {
+                console.warn('Не вдалося завантажити стан з localStorage', e);
+            }
+        }
+    }
+    // -----------------------------------
+    
     // Оновлення рівнів і текстів
     function updateLevels() {
         const waterPercent = (machine.waterAmount / 500) * 100;
@@ -73,6 +101,9 @@ $(document).ready(function() {
         $('#milk-level').text(machine.milkAmount + 'ml');
         $('#coffee-level').text(machine.coffeeAmount + 'g');
         $('#sugar-level').text(machine.sugarAmount + 'g');
+        
+        // Зберігаємо стан після будь-якої зміни рівнів
+        saveToLocalStorage();
     }
     
     // Вибір кави
@@ -148,7 +179,7 @@ $(document).ready(function() {
         machine.milkAmount -= recipe.milk;
         machine.coffeeAmount -= recipe.coffee;
         machine.sugarAmount -= recipe.sugar;
-        updateLevels();
+        updateLevels();  // тут автоматично збережеться новий стан
         
         playSound(brewSound);
         
@@ -181,7 +212,8 @@ $(document).ready(function() {
     });
     
     // Ініціалізація
-    updateLevels();
+    loadFromLocalStorage();        // відновлюємо збережені рівні
+    updateLevels();                // відображаємо їх
     $('#cup-image').attr('src', './img/cofee_cup_empty.png');
     $('.drink-btn[data-coffee="americano"]').addClass('selected');
     $('#selected-drink').text(coffeeRecipes.americano.name);
