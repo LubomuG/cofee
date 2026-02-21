@@ -1,0 +1,366 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+}
+
+body {
+    background: #202020;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Основний контейнер імітує стільницю */
+.machine-container {
+    background: #2c2c2c;
+    border-radius: 40px;
+    padding: 25px;
+    box-shadow: 0 30px 40px rgba(0,0,0,0.8), inset 0 2px 5px rgba(255,255,255,0.1);
+}
+
+/* Металевий корпус кавоварки */
+.machine-body {
+    width: 950px;
+    background: linear-gradient(165deg, #3d3d3d 0%, #2a2a2a 100%);
+    border-radius: 60px 60px 40px 40px;
+    padding: 30px 35px;
+    border: 2px solid #6b6b6b;
+    box-shadow: inset 0 -8px 15px #1e1e1e, inset 0 8px 10px #6f6f6f, 0 20px 25px black;
+    position: relative;
+}
+
+/* Верхня панель з брендом */
+.top-panel {
+    background: #1f1f1f;
+    border-radius: 100px;
+    padding: 15px 30px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    border: 1px solid #898989;
+    box-shadow: inset 0 2px 8px #0a0a0a;
+}
+
+.brand {
+    color: #c7a35b;
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-shadow: 0 2px 5px black;
+    border-right: 3px solid #5a5a5a;
+    padding-right: 25px;
+}
+
+.model {
+    color: #b0b0b0;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+
+/* РК-екран */
+.lcd-screen {
+    flex: 1;
+    background: #102010;
+    border-radius: 20px;
+    padding: 12px 20px;
+    border: 4px solid #3f3f3f;
+    box-shadow: inset 0 0 15px #1e4a1e;
+}
+
+.screen-content {
+    color: #9bff9b;
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 8px #00cc00;
+}
+
+.selected-drink {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.recipe-details {
+    font-size: 16px;
+    opacity: 0.9;
+    margin-bottom: 8px;
+}
+
+.progress-bar {
+    height: 8px;
+    background: #1e3a1e;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: #7eff7e;
+    border-radius: 10px;
+    box-shadow: 0 0 15px #32cd32;
+    transition: width 0.2s;
+}
+
+/* Панель резервуарів (скляні контейнери) */
+.tanks-panel {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 40px;
+    background: #323232;
+    border-radius: 80px;
+    padding: 25px 30px;
+    border: 1px solid #7a7a7a;
+    box-shadow: inset 0 3px 12px #1a1a1a, inset 0 -3px 5px #555;
+}
+
+.tank {
+    flex: 1;
+    text-align: center;
+}
+
+.tank-label {
+    color: #d4d4d4;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 3px black;
+}
+
+.tank-glass {
+    height: 130px;
+    background: linear-gradient(145deg, #2b2b2b, #1a1a1a);
+    border: 4px solid #4f4f4f;
+    border-radius: 40px 40px 20px 20px;
+    box-shadow: inset 0 -8px 8px #0d0d0d, 0 10px 10px rgba(0,0,0,0.6);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+
+.tank-glass.beans {
+    background: #231f1b; /* імітація контейнера для зерен */
+}
+
+.liquid {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    transition: height 0.3s ease-out;
+    border-radius: 0 0 16px 16px;
+}
+
+.water-liquid {
+    background: linear-gradient(145deg, #3d9eff, #1b6bb0);
+    box-shadow: inset 0 5px 10px #a0d0ff;
+}
+
+.milk-liquid {
+    background: linear-gradient(145deg, #f8f8f8, #c0c0c0);
+    box-shadow: inset 0 5px 10px #ffffff;
+}
+
+.coffee-liquid {
+    background: linear-gradient(145deg, #7b5e46, #4f3a2c);
+    box-shadow: inset 0 5px 10px #b99e82;
+}
+
+.sugar-liquid {
+    background: linear-gradient(145deg, #f7e9c3, #d4b88c);
+    box-shadow: inset 0 5px 10px #fff8e7;
+}
+
+.tank-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #2b2b2b;
+    border-radius: 50px;
+    padding: 5px 12px;
+    border: 1px solid #7a7a7a;
+}
+
+.tank-level {
+    color: #e0e0e0;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.tank-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #ffaa33;
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+    color: #1f1f1f;
+    cursor: pointer;
+    box-shadow: 0 5px 0 #a15500, inset 0 2px 12px #ffd58c;
+    transition: 0.05s linear;
+    line-height: 1;
+}
+
+.tank-btn:active {
+    transform: translateY(5px);
+    box-shadow: 0 0 0 #a15500, inset 0 2px 12px #ffd58c;
+}
+
+.tank-btn:disabled {
+    opacity: 0.4;
+    transform: none;
+    pointer-events: none;
+}
+
+/* Нижня панель */
+.bottom-panel {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    background: #2d2d2d;
+    border-radius: 50px;
+    padding: 25px 35px;
+    border: 1px solid #7a7a7a;
+    box-shadow: inset 0 2px 10px #1b1b1b, 0 10px 10px black;
+}
+
+/* Кнопки вибору кави (стилізовані під металеві) */
+.drink-buttons {
+    display: flex;
+    gap: 8px;
+    flex: 2;
+}
+
+.drink-btn {
+    flex: 1;
+    background: linear-gradient(145deg, #4a4a4a, #2f2f2f);
+    border: 2px solid #7e7e7e;
+    border-radius: 40px;
+    padding: 8px 2px;
+    color: white;
+    font-weight: 600;
+    font-size: 12px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 7px 0 #1c1c1c, inset 0 2px 8px #b3b3b3;
+    transition: 0.05s linear;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.drink-btn.selected {
+    border-color: #ffaa33;
+    background: linear-gradient(145deg, #5e5e5e, #3d3d3d);
+    transform: translateY(2px);
+    box-shadow: 0 5px 0 #1c1c1c, inset 0 2px 8px #ffaa33;
+}
+
+.drink-btn img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 4px black);
+    margin-bottom: 4px;
+}
+
+.drink-btn:active {
+    transform: translateY(5px);
+    box-shadow: 0 2px 0 #1c1c1c, inset 0 2px 8px #b3b3b3;
+}
+
+/* Зона чашки */
+.cup-area {
+    flex: 1;
+    text-align: center;
+}
+
+.drip-tray {
+    background: #3a3a3a;
+    border-radius: 60px 60px 30px 30px;
+    padding: 20px 20px 10px;
+    border: 2px solid #757575;
+    box-shadow: inset 0 -8px 8px #1e1e1e, inset 0 5px 8px #8b8b8b;
+}
+
+.cup-image {
+    width: 90px;
+    height: auto;
+    filter: drop-shadow(0 12px 8px #0f0f0f);
+    transition: all 0.2s;
+}
+
+.cup-status {
+    margin-top: 12px;
+    color: #cdcdcd;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 14px;
+}
+
+/* Кнопка приготування */
+.brew-area {
+    flex: 0.8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.led-indicator {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #2e7d32;
+    box-shadow: 0 0 15px #00ff40;
+    transition: 0.2s;
+}
+
+.led-indicator.brewing {
+    background: #f39c12;
+    box-shadow: 0 0 20px #f5b041;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.2); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+.brew-button {
+    width: 100%;
+    background: #c93e3e;
+    border: none;
+    padding: 18px 0;
+    border-radius: 70px;
+    font-size: 28px;
+    font-weight: 800;
+    color: white;
+    letter-spacing: 3px;
+    box-shadow: 0 10px 0 #731212, inset 0 2px 20px #ff8c8c;
+    cursor: pointer;
+    transition: 0.05s linear;
+    text-transform: uppercase;
+}
+
+.brew-button:active {
+    transform: translateY(8px);
+    box-shadow: 0 2px 0 #731212, inset 0 2px 20px #ff8c8c;
+}
+
+.brew-button:disabled {
+    opacity: 0.5;
+    transform: translateY(5px);
+    box-shadow: 0 5px 0 #731212;
+    pointer-events: none;
+}

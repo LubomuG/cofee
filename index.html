@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeLonghi Realista 9200</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="machine-container">
+        <!-- Основне тіло кавоварки -->
+        <div class="machine-body">
+            
+            <!-- Верхня панель з дисплеєм -->
+            <div class="top-panel">
+                <div class="brand">DeLonghi</div>
+                <div class="model">PERFECTA 9200</div>
+                <div class="lcd-screen">
+                    <div class="screen-content">
+                        <div class="selected-drink" id="selected-drink">AMERICANO</div>
+                        <div class="recipe-details" id="recipe-details">150ml water · 20g coffee · 5g sugar</div>
+                        <div class="progress-bar" id="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Середня частина: резервуари (скляні контейнери) -->
+            <div class="tanks-panel">
+                <!-- Вода -->
+                <div class="tank" data-ing="water">
+                    <div class="tank-label">WATER</div>
+                    <div class="tank-glass">
+                        <div class="liquid water-liquid" id="water-liquid" style="height: 80%"></div>
+                    </div>
+                    <div class="tank-controls">
+                        <span class="tank-level" id="water-level">400ml</span>
+                        <button class="tank-btn add-btn" data-ing="water">+</button>
+                    </div>
+                </div>
+                <!-- Молоко -->
+                <div class="tank" data-ing="milk">
+                    <div class="tank-label">MILK</div>
+                    <div class="tank-glass">
+                        <div class="liquid milk-liquid" id="milk-liquid" style="height: 70%"></div>
+                    </div>
+                    <div class="tank-controls">
+                        <span class="tank-level" id="milk-level">350ml</span>
+                        <button class="tank-btn add-btn" data-ing="milk">+</button>
+                    </div>
+                </div>
+                <!-- Кава (зерна) -->
+                <div class="tank" data-ing="coffee">
+                    <div class="tank-label">COFFEE</div>
+                    <div class="tank-glass beans">
+                        <div class="liquid coffee-liquid" id="coffee-liquid" style="height: 75%"></div>
+                    </div>
+                    <div class="tank-controls">
+                        <span class="tank-level" id="coffee-level">150g</span>
+                        <button class="tank-btn add-btn" data-ing="coffee">+</button>
+                    </div>
+                </div>
+                <!-- Цукор -->
+                <div class="tank" data-ing="sugar">
+                    <div class="tank-label">SUGAR</div>
+                    <div class="tank-glass">
+                        <div class="liquid sugar-liquid" id="sugar-liquid" style="height: 90%"></div>
+                    </div>
+                    <div class="tank-controls">
+                        <span class="tank-level" id="sugar-level">180g</span>
+                        <button class="tank-btn add-btn" data-ing="sugar">+</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Нижня панель: кнопки вибору кави, чашка, кнопка старт -->
+            <div class="bottom-panel">
+                <!-- Ряд кнопок вибору напою (фізичні кнопки) -->
+                <div class="drink-buttons">
+                    <button class="drink-btn" data-coffee="americano">
+                        <img src="./img/acerucano.png" alt="Americano">
+                        <span>Americano</span>
+                    </button>
+                    <button class="drink-btn" data-coffee="cappuccino">
+                        <img src="./img/caputchino.png" alt="Cappuccino">
+                        <span>Cappuccino</span>
+                    </button>
+                    <button class="drink-btn" data-coffee="espresso">
+                        <img src="./img/Espresso.png" alt="Espresso">
+                        <span>Espresso</span>
+                    </button>
+                    <button class="drink-btn" data-coffee="latte">
+                        <img src="./img/latte.png" alt="Latte">
+                        <span>Latte</span>
+                    </button>
+                    <button class="drink-btn" data-coffee="mocachino">
+                        <img src="./img/mocochuno.png" alt="Mocachino">
+                        <span>Mocachino</span>
+                    </button>
+                </div>
+                
+                <!-- Зона чашки з піддоном -->
+                <div class="cup-area">
+                    <div class="drip-tray">
+                        <img src="./img/cofee_cup_empty.png" alt="Coffee cup" id="cup-image" class="cup-image empty">
+                    </div>
+                    <div class="cup-status" id="cup-status">порожня</div>
+                </div>
+                
+                <!-- Кнопка приготування з індикатором -->
+                <div class="brew-area">
+                    <div class="led-indicator" id="led-indicator"></div>
+                    <button class="brew-button" id="brew-btn">BREW</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Звуки (невидимі) -->
+        <audio id="fill-sound" src="sound/fill.mp3" preload="auto"></audio>
+        <audio id="brew-sound" src="sound/brew.mp3" preload="auto"></audio>
+        <audio id="done-sound" src="sound/done.mp3" preload="auto"></audio>
+        <audio id="click-sound" src="sound/click.mp3" preload="auto"></audio>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./main.js"></script>
+</body>
+</html>
